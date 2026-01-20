@@ -76,6 +76,12 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+        $Countries = ["Ireland" => "Dublin", "France" => "Paris", "Germany" => "Berlin", "Sweden" => "Stockholm", "Italy" => "Rome"];
+
+        foreach($Countries as $Country => $Capital){
+            echo "The capital of ", $Country, " is ", $Capital, "<br>";
+        }
         ?>
     </div>
 
@@ -93,6 +99,21 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+        $Menu = [
+            "Starters" => ["Doughballs " => "€11.80", "Breadsticks " => "€5", "Soup" => "€3"],
+            "Mains" => ["Pizza " => "€12", "Pasta " => "€10", "Carbonara" => "€13"]
+        ];
+
+        foreach($Menu as $Categories => $Items){
+            echo $Categories, "<br>";
+
+            foreach($Items as $Item => $Price){
+                echo $Item, ": ", $Price, "<br>";
+            }
+        }
+
+
         ?>
     </div>
 
