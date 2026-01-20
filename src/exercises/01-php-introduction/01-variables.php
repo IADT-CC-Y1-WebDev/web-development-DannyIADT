@@ -82,9 +82,9 @@
         $HasDiscount = false;
         $IsPremiumMember = true;
 
-        echo "Is Student:", ($IsStudent) ? ("Yes") : ("No");
-        echo "Has Discount:" , ($HasDiscount) ? ("Yes") : ("No");
-        echo "Is Premium Member:", ($IsPremiumMember) ? ("Yes") : ("No");
+        echo "Is Student:", ($IsStudent) ? ("Yes") : ("No"), "<br>";
+        echo "Has Discount:" , ($HasDiscount) ? ("Yes") : ("No"), "<br>";
+        echo "Is Premium Member:", ($IsPremiumMember) ? ("Yes") : ("No"), "<br>";
         ?>
     </div>
 
