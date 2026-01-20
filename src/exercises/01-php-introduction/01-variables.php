@@ -51,6 +51,17 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+        $P1 = 10;
+        $Q1 = 10;
+        $P2 = 25;
+        $Q2 = 10;
+        $P3 = 15;
+        $Q3 = 10;
+
+        $Total = ($P1 * $Q1) + ($P2 * $Q2) + ($P3 * $Q3);
+        $Subtotal = ($Total * 0.9);
+        Echo "Final Price: €$Subtotal";
         ?>
     </div>
 
@@ -66,6 +77,14 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+        $IsStudent = true;
+        $HasDiscount = false;
+        $IsPremiumMember = true;
+
+        echo "Is Student:", ($IsStudent) ? ("Yes") : ("No");
+        echo "Has Discount:" , ($HasDiscount) ? ("Yes") : ("No");
+        echo "Is Premium Member:", ($IsPremiumMember) ? ("Yes") : ("No");
         ?>
     </div>
 
