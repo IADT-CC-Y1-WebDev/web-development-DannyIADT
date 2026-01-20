@@ -27,6 +27,14 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+        $Movies = ["Matrix", "Lord of the rings", "Harry Potter", "Dark Knight Rises", "Joker"];
+
+        $i = 1;
+        foreach($Movies as $Movie){
+            echo "Movie ", $i, ": ", $Movie, "<br>";
+            $i++;
+        }
         ?>
     </div>
 
@@ -41,7 +49,17 @@
     <p class="output-label">Output:</p>
     <div class="output">
         <?php
-        // TODO: Write your solution here
+        $Name = "Danny";
+        $ID = "09131391";
+        $Course = "Creative Computing";
+        $Grade = "A+";
+
+        $i = [$Name, $ID, $Course, $Grade];
+
+        echo "Student Name: ", $i[0], "<br>";
+        echo "Student ID: ", $i[1], "<br>";
+        echo "Course: ", $i[2], "<br>";
+        echo "Grade: ", $i[3], "<br>";
         ?>
     </div>
 
