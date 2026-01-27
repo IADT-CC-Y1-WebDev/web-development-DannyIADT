@@ -1,0 +1,17 @@
+<div class="output">
+    <?php
+
+    function Truncate($text, $length){
+        return substr($text, 0, $length); 
+    }
+
+    function FormatPrice($price){
+        return number_format($price, 2);
+    }
+
+    function getCurrentYear(){
+        return date("Y");
+    }
+
+    ?>
+</div>

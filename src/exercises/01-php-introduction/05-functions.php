@@ -97,22 +97,14 @@
         <?php
         // TODO: Write your solution here
 
-        echo getArrayStats([1,2,3]);
+        getArrayStats([1,2,3]);
 
         function getArrayStats($n){
-            $CurrentMinimum = 100;
-            $CurrentMaximum = 0;
-            foreach($n as $x){
-                if ($x < $CurrentMinimum){
-                    $CurrentMinimum = $x;
-                }
 
-                if($x > $CurrentMaximum){
-                    $CurrentMaximum = $x;
-                }
+            $Min = min($n);
+            $Max = max($n);
 
-                return ["min" => $CurrentMinimum, "max" => $CurrentMaximum];
-            }
+            echo($Min), "<br>", ($Max);
         }
         ?>
     </div>

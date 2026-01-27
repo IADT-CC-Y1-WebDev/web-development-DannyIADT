@@ -22,6 +22,9 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+        require '../inc/navigation.php';
+
         ?>
     </div>
 
@@ -33,6 +36,15 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+        require_once '../lib/utilities';
+
+        echo Truncate("Hello", 3), "<br>";
+
+        echo FormatPrice(1050), "<br>";
+
+        echo getCurrentYear();
+
         ?>
     </div>
 
@@ -44,6 +56,12 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+        require_once '../lib/formatters.php';
+        require_once '../lib/validators.php';
+
+        echo formatPhoneNumber(123456789);
+        echo isValidEmail("n00254205@iadt.ie");
         ?>
     </div>
 
