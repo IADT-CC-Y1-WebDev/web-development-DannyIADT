@@ -38,10 +38,7 @@
 
         require_once __DIR__ .  '/classes/Student.php';
 
-        $student = new student();
-
-        $student -> Name = "Danny"; 
-        $student -> Number = "n00254205";
+        $student = new student("Danny" , "N00254205");
 
         echo "Name: " . $student -> Name . "<br>";
         echo "Number: " . $student -> Number;
@@ -65,6 +62,18 @@
         <?php
         // TODO: Write your solution here
         // require_once __DIR__ . '/classes/Student.php';
+
+        require_once __DIR__ . '/classes/Student.php';
+
+        $student = new Student("Danny", "N00254205");
+        $Student1 = new Student("John", "N00453412");
+
+        echo "Name: " . $student -> Name . "<br>";
+        echo "Number: " . $student -> Number . "<br>";
+
+        echo "Name: " . $Student1 -> Name . "<br>";
+        echo "Number: ". $Student1 -> Number . "<br>";
+
         ?>
     </div>
 
@@ -85,6 +94,13 @@
         <?php
         // TODO: Write your solution here
         // require_once __DIR__ . '/classes/Student.php';
+
+        require_once __DIR__ . '/classes/Student.php';
+
+        $student = new Student("Danny" , "N00254205");
+
+        echo "Student " . $student->getName();
+        echo " has number " . $student->getNumber();
         ?>
     </div>
 
