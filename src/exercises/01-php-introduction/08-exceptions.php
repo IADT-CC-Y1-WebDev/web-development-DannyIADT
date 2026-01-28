@@ -28,6 +28,23 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+        function calculateSquareRoot($number){
+            try{
+                if($number < 0){
+                    throw new Exception("Number cannot be negative");
+                }
+                else{
+                    echo sqrt($number);
+                }
+            }
+
+            catch(Exception $e){
+                echo "Error: " . $e->getMessage();
+            }
+        }
+
+        calculateSquareRoot(-9);
         ?>
     </div>
 
@@ -45,6 +62,23 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+        function validateEmail($email){
+            try{
+                if(str_contains($email, "@")){
+                    return;
+                }
+                else{
+                    throw new Exception ("Email must contain @ symbol");
+                }
+            }
+
+            catch(Exception $e){
+                echo "Error: " . $e->getMessage();
+            }
+        }
+
+        validateEmail("Hello");
         ?>
     </div>
 
@@ -61,6 +95,25 @@
     <div class="output">
         <?php
         // TODO: Write your solution here
+
+        function processFile($filename){
+            try{
+                if(empty($filename)){
+                    throw new Exception ("Empty filename");
+                }
+            }
+
+            catch (Exception $e){
+                echo "Error: " . $e->getMessage() . "<br>";
+            }
+
+            finally{
+                echo "Processing complete";
+            }
+        }
+
+        processFile("");
+
         ?>
     </div>
 
