@@ -1,14 +1,26 @@
 <?php
     class Student{
-        public $Name;
-        public $Number;
+        protected $Name;
+        protected $Number;
 
         public function __construct($Name, $Number){
-            $this->Name = $Name;
-            $this->Number = $Number;
+            try{
+                if(empty($Name) || empty($Number)){
+                    throw new Exception("Missing student name or number");
+                } 
+
+                $this->Name = $Name;
+                $this->Number = $Number;
+            }
+
+            catch(Exception $e){
+                echo "Error: " . $e->getMessage() . "<br>";
+            }
+
         }
 
         public function getName(){
+            
             return $this->Name;
         }
 

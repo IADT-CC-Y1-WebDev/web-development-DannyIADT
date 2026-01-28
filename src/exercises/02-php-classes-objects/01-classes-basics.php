@@ -40,8 +40,8 @@
 
         $student = new student("Danny" , "N00254205");
 
-        echo "Name: " . $student -> Name . "<br>";
-        echo "Number: " . $student -> Number;
+        echo "Name: " . $student -> getName() . "<br>";
+        echo "Number: " . $student -> getNumber();
         ?>
     </div>
 
@@ -68,11 +68,11 @@
         $student = new Student("Danny", "N00254205");
         $Student1 = new Student("John", "N00453412");
 
-        echo "Name: " . $student -> Name . "<br>";
-        echo "Number: " . $student -> Number . "<br>";
+        echo "Name: " . $student -> getName() . "<br>";
+        echo "Number: " . $student -> getNumber() . "<br>";
 
-        echo "Name: " . $Student1 -> Name . "<br>";
-        echo "Number: ". $Student1 -> Number . "<br>";
+        echo "Name: " . $Student1 -> getName() . "<br>";
+        echo "Number: ". $Student1 -> getNumber() . "<br>";
 
         ?>
     </div>
