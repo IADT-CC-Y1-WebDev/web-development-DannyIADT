@@ -19,8 +19,7 @@
 
         }
 
-        public function getName(){
-            
+        public function getName(){ 
             return $this->Name;
         }
 
