@@ -1,41 +1,9 @@
 <?php
-// =============================================================================
-// EXERCISE: Visit Counter with Cookies
-// =============================================================================
-// Complete the TODO sections below to create a visit counter using cookies.
-// Remember: setcookie() must be called BEFORE any HTML output!
-// =============================================================================
-
-// =============================================================================
-// Exercise 1: Display Visit Count
-// Task: Complete the PHP code at the top of this file to:
-// 1. Read the current visit count from the cookie (or default to 0)
-// 2. Increment the visit count
-// 3. Save the new count back to the cookie
-// -----------------------------------------------------------------------------
-// TODO Exercise 1: Write your solution here
-
-// =============================================================================
-
-// =============================================================================
-// Exercise 3: Handle the reset action
-// When $_GET['reset'] is set:
-// 1. Delete the cookie by setting expiry in the past
-// 2. Redirect to this page (use header('Location: 01-visit-counter.php'))
-// 3. Call exit; after the redirect
-// -----------------------------------------------------------------------------
-// TODO Exercise 3: Write your solution here
-
-// =============================================================================
-
-// =============================================================================
-// Exercise 4: Track Last Visit Time (Bonus)
-// 1. Read the existing 'last_visit' cookie (if any)
-// 2. Set a new 'last_visit' cookie with the current timestamp
-// -----------------------------------------------------------------------------
-// TODO Exercise 4: Write your solution here
-
-// =============================================================================
+    if(isset($_GET['reset'])){
+        setcookie('VisitCount', '', time() - 3600, '/');
+        header('Location: 01-visit-counter.php');
+        exit;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,6 +37,7 @@
         <?php
 
         $ExpiryTime = time() + (60 * 60 * 24 * 30);
+        
 
         if (isset($_COOKIE['VisitCount'])){
             $VisitCount = (int)$_COOKIE['VisitCount'];
@@ -117,9 +86,6 @@
         <p><a href="01-visit-counter.php?reset=1">Reset Counter</a></p>
 
         <?php
-            if(isset($_GET['reset'])){
-                setcookie('VisitCount', '', time() - 3600, '/');
-            }
         ?>
     </div>
 
