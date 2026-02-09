@@ -59,9 +59,9 @@ try {
 
     $data = [
         'Title' => $_POST['title'] ?? null,
-        'Author' => $_POST['Author'] ?? null,
-        'Publisher' => $_POST['Publisher'] ?? null,
-        'Year' => $_POST['Year'] ?? null,
+        'Author' => $_POST['author'] ?? null,
+        'Publisher' => $_POST['publisher_id'] ?? null,
+        'Year' => $_POST['year'] ?? null,
         'isbn' => $_POST['isbn'] ?? null,
         'format_ids' => $_POST['format_ids'] ?? [],
         'description' => $_POST['description'] ?? null,
@@ -81,19 +81,23 @@ try {
 
     $year = date("Y");
     $rules = [
-        'Title' => "required|noempty|min:5|max:255",
-        'Author' => "required|noempty|min:5|max:255",
-        'Publisher' => "required|noempty|integer",
-        'Year' => "required|noempty|integer|min:1900|max:" . $year,
+        'title' => "required|noempty|min:5|max:255",
+        'author' => "required|noempty|min:5|max:255",
+        'publisher_id' => "required|noempty|integer",
+        'year' => "required|noempty|integer|minvalue:1900|max:" . $year,
         'isbn' => "required|noempty|min:13|max:13",
         'format_ids' => "required|noempty|array|min:1|max:4",
         'description' => "required|noempty|min:10"
     ];
 
-    $validator = new Validator($data, $rules);
+    $validator = new Validator($_POST, $rules);
 
     if($validator->fails()){
-        dd($validator->errors(), true);
+        foreach ($validator->errors() as $field => $fieldErrors){
+            $errors[$field] = $fieldErrors[0];
+        }
+
+        throw new exception("Validation Failed!");
     }
 
     echo "validation successful!";
@@ -142,6 +146,8 @@ catch (Exception $e) {
     // TODO: In the catch block, store validation errors in the session
     // TODO: Redirect back to the form
 
+    setFormErrors($errors);
+
 
     // =========================================================================
     // STEP 6: Store Form Data for Repopulation
@@ -149,12 +155,16 @@ catch (Exception $e) {
     // =========================================================================
     // TODO: Before redirecting on error, also store the form data
 
+    setFormData($data);
+
 
     // =========================================================================
     // STEP 8: Flash Messages
     // See: /examples/04-php-forms/step-08-flash-messages/
     // =========================================================================
     // TODO: On validation error, you set an error flash message
+
+    redirect("book_create.php");
 
     
 }
