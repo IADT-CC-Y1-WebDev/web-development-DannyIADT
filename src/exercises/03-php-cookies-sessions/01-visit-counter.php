@@ -67,12 +67,20 @@
     <p class="output-label">Output:</p>
     <div class="output">
         <?php
-        // =====================================================================
-        // Exercise 1: Display the visit count
-        // ---------------------------------------------------------------------
-        // TODO Exercise 1: Write your solution here
 
-        // =====================================================================
+        $ExpiryTime = time() + (60 * 60 * 24 * 30);
+
+        if (isset($_COOKIE['VisitCount'])){
+            $VisitCount = (int)$_COOKIE['VisitCount'];
+            echo "You have visited " . $VisitCount . " Times!";
+            $VisitCount++;
+        }
+        else{
+            echo "This is your first visit!";
+            $VisitCount = 1;
+        }
+
+        setcookie('VisitCount', $VisitCount, $ExpiryTime, '/');
         ?>
     </div>
 
@@ -86,15 +94,12 @@
     <p class="output-label">Output:</p>
     <div class="output">
         <?php
-        // =====================================================================
-        // Exercise 2: Use an if/else statement to display:
-        // - "Welcome, first-time visitor!" if visitCount is 1
-        // - "Hello again!" if visitCount is greater than 1 but less than 10
-        // - "Welcome back!" if visitCount is greater than or equal to 10
-        // ---------------------------------------------------------------------
-        // TODO Exercise 2: Write your solution here
-        
-        // =====================================================================
+        if (isset($_COOKIE['VisitCount'])){
+            echo "Welcome back!";
+        }
+        else{
+            echo "This is your first visit!";
+        }
         ?>
     </div>
 
@@ -110,6 +115,12 @@
     <div class="output">
         <p><a href="01-visit-counter.php">Refresh Page</a></p>
         <p><a href="01-visit-counter.php?reset=1">Reset Counter</a></p>
+
+        <?php
+            if(isset($_GET['reset'])){
+                setcookie('VisitCount', '', time() - 3600, '/');
+            }
+        ?>
     </div>
 
     <!-- Exercise 4: Bonus - Track Last Visit -->
