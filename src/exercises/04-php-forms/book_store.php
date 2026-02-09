@@ -38,6 +38,12 @@ try {
     // =========================================================================
     // TODO: Check that the request method is POST
 
+    if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+        throw new exception ('Invalid request method');
+    }
+
+    dd($_POST);
+
 
     // =========================================================================
     // STEP 3: Extract Data
@@ -51,6 +57,18 @@ try {
     // extraction:
     // 'format_ids' => $_POST['format_ids'] ?? []
 
+    $data = [
+        'Title' => $_POST['title'] ?? null,
+        'Author' => $_POST['Author'] ?? null,
+        'Publisher' => $_POST['Publisher'] ?? null,
+        'Year' => $_POST['Year'] ?? null,
+        'isbn' => $_POST['isbn'] ?? null,
+        'format_ids' => $_POST['format_ids'] ?? [],
+        'description' => $_POST['description'] ?? null,
+    ];
+
+    dd($data);
+
 
     // =========================================================================
     // STEP 4: Validate Data
@@ -60,6 +78,26 @@ try {
     // TODO: Check validation data against the rules
     // Create validator and check if validation fails; if so, store the first 
     // error for each field in the $errors array and throw an exception
+
+    $year = date("Y");
+    $rules = [
+        'Title' => "required|noempty|min:5|max:255",
+        'Author' => "required|noempty|min:5|max:255",
+        'Publisher' => "required|noempty|integer",
+        'Year' => "required|noempty|integer|min:1900|max:" . $year,
+        'isbn' => "required|noempty|min:13|max:13",
+        'format_ids' => "required|noempty|array|min:1|max:4",
+        'description' => "required|noempty|min:10"
+    ];
+
+    $validator = new Validator($data, $rules);
+
+    if($validator->fails()){
+        dd($validator->errors(), true);
+    }
+
+    echo "validation successful!";
+
 
 
     // =========================================================================
@@ -95,6 +133,8 @@ try {
     // redirect back to the form
 }
 catch (Exception $e) {
+
+    echo "Error: " . $e -> getMessage();
     // =========================================================================
     // STEP 5: Store Errors and Redirect
     // See: /examples/04-php-forms/step-05-display-errors/

@@ -12,6 +12,8 @@ require_once 'etc/config.php';
 // -----------------------------------------------------------------------------
 // TODO: Write your code here
 
+
+
 // =============================================================================
 
 // Create products (they auto-register via the Registry pattern)
@@ -20,8 +22,21 @@ new Product(2, 'Jeans', 49.99, 'Classic blue jeans');
 new Product(3, 'Sneakers', 79.99, 'Comfortable sneakers');
 new Product(4, 'Hat', 14.99, 'Baseball cap');
 
+$AllProducts = Product::findAll();
+
 // =============================================================================
 // Exercise 2: Initialize the cart
+
+$Cart = ShoppingCart::getInstance();
+
+$product = Product::findById((int)$_GET['add']);
+
+if($product !== null){
+    $cart->add($product);
+}
+
+$count = $cart->getCount();
+$total = $cart->getTotal();
 // -----------------------------------------------------------------------------
 // TODO: Write your code here
  
