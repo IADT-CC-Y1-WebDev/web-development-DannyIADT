@@ -65,6 +65,7 @@ try {
         'isbn' => $_POST['isbn'] ?? null,
         'format_ids' => $_POST['format_ids'] ?? [],
         'description' => $_POST['description'] ?? null,
+        'cover' => $_FILES['cover'] ?? null
     ];
 
     dd($data);
@@ -87,18 +88,22 @@ try {
         'year' => "required|noempty|integer|minvalue:1900|max:" . $year,
         'isbn' => "required|noempty|min:13|max:13",
         'format_ids' => "required|noempty|array|min:1|max:4",
-        'description' => "required|noempty|min:10"
+        'description' => "required|noempty|min:10",
+        'cover' => 'required|file|image|mimes:jpg, jpeg, png|max_file_size:5242880'
     ];
 
-    $validator = new Validator($_POST, $rules);
+    $validator = new Validator($data, $rules);
 
     if($validator->fails()){
         foreach ($validator->errors() as $field => $fieldErrors){
             $errors[$field] = $fieldErrors[0];
         }
 
-        throw new exception("Validation Failed!");
+        throw new Exception("Validation Failed!");
     }
+
+    $uploader = new ImageUpload();
+    $imageFilename = $uploader->process($_FILES['cover']);
 
     echo "validation successful!";
 
