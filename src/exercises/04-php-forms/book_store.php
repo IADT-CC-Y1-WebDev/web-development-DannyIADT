@@ -58,10 +58,10 @@ try {
     // 'format_ids' => $_POST['format_ids'] ?? []
 
     $data = [
-        'Title' => $_POST['title'] ?? null,
-        'Author' => $_POST['author'] ?? null,
-        'Publisher' => $_POST['publisher_id'] ?? null,
-        'Year' => $_POST['year'] ?? null,
+        'title' => $_POST['title'] ?? null,
+        'author' => $_POST['author'] ?? null,
+        'publisher_id' => $_POST['publisher_id'] ?? null,
+        'year' => $_POST['year'] ?? null,
         'isbn' => $_POST['isbn'] ?? null,
         'format_ids' => $_POST['format_ids'] ?? [],
         'description' => $_POST['description'] ?? null,

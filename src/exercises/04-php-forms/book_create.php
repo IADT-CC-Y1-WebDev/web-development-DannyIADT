@@ -88,7 +88,7 @@ $formats = [
                  ===========================================================
                  TODO: Repopulate title field
             -->
-            <input type="text" id="title" name="title" value="<?=old('Title')?>">
+            <input type="text" id="title" name="title" value="<?=old('title')?>">
 
             <!-- ===========================================================
                  STEP 5: Display Errors
@@ -111,7 +111,7 @@ $formats = [
         <div class="form-group">
             <label for="author">Author:</label>
             <!-- TODO: Repopulate author field                               -->
-            <input type="text" id="author" name="author" value="<?=old('Author')?>">
+            <input type="text" id="author" name="author" value="<?=old('author')?>">
 
             <!-- TODO: Display error message if author validation fails      -->
 
@@ -136,7 +136,7 @@ $formats = [
                      TODO: Use chosen() to repopulate selected option 
                 -->
                 <?php foreach ($publishers as $pub): ?>
-                    <option value="<?= $pub['id'] ?>">
+                    <option value="<?= $pub['id'] ?>" <?= chosen('publisher_id', $pub['id']) ? "selected" : "" ?>>
                         <?= h($pub['name']) ?>
                     </option>
                 <?php endforeach; ?>
@@ -156,7 +156,7 @@ $formats = [
         <div class="form-group">
             <label for="year">Year:</label>
             <!-- TODO: Repopulate year field                                 -->
-            <input type="text" id="year" name="year" value="<?=old('Year')?>">
+            <input type="text" id="year" name="year" value="<?=old('year')?>">
 
             <!-- TODO: Display error message if year validation fails        -->
               <?php if (error('year')): ?>
@@ -196,7 +196,12 @@ $formats = [
                 -->
                 <?php foreach ($formats as $format): ?>
                     <label class="checkbox-label">
-                        <input type="checkbox" name="format_ids[]" value="<?= $format['id'] ?>">
+                        <input type="checkbox" 
+                            name="format_ids[]" 
+                            value="<?= $format['id'] ?>"
+                            <?= chosen('format_ids', $format['id']) ? "checked" : ""?>
+
+                        >
                         <?= h($format['name']) ?>
                     </label>
                 <?php endforeach; ?>
@@ -204,8 +209,8 @@ $formats = [
 
             <!-- TODO: Display error message if formats validation fails     -->
 
-             <?php if (error('format_ids[]')): ?>
-                <p class="error"><?= error('format_ids[]') ?></p>
+             <?php if (error('format_ids')): ?>
+                <p class="error"><?= error('format_ids') ?></p>
             <?php endif; ?>
 
         </div>
