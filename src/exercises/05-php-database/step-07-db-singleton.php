@@ -31,6 +31,18 @@ require_once __DIR__ . '/lib/config.php';
             <?php
             // TODO: Write your solution here
             // 1. Get connection: $db = DB::getInstance()->getConnection();
+            $db = DB::getInstance()->getConnection();
+            $db2 = DB::getInstance()->getConnection();
+
+            if($db === $db2){
+                echo "Same instance! ";
+            }
+
+            $stmt = $db->prepare("SELECT * FROM books WHERE id = :id");
+            $stmt->execute(['id' => 1]);
+            $book = $stmt->fetch();
+
+            echo $book['title']
             // 2. Execute: SELECT COUNT(*) as total FROM books
             // 3. Display the count
             // 4. Get DB::getInstance() twice and compare with ===

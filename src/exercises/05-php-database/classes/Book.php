@@ -44,6 +44,18 @@ class Book
     public function __construct($data = [])
     {
         // TODO: Get database connection from DB singleton
+        $this->db = DB::getInstance()->getConnection();
+
+        if(!empty($data)){
+            $this->id = $data['id'] ?? null;
+            $this->title = $data['title'] ?? null;
+            $this->author = $data['author'] ?? null;
+            $this->publisher_id = $data['publisher_id'] ?? null;
+            $this->year = $data['year'] ?? null;
+            $this->isbn = $data['isbn'] ?? null;
+            $this->description = $data['description'] ?? null;
+            $this->cover_filename = $data['cover_filename'] ?? null;
+        }
         // TODO: If $data is not empty, populate properties using null coalescing operator
     }
 
@@ -93,5 +105,16 @@ class Book
     public function toArray()
     {
         // TODO: Implement this method
+
+        return[
+            'id' => $this->id,
+            'title' => $this->title,
+            'author' => $this->author,
+            'publisher_id' => $this->publisher_id,
+            'year' => $this->year,
+            'isbn' => $this->isbn,
+            'description' => $this->description,
+            'cover_filename' => $this->cover_filename
+        ];
     }
 }
