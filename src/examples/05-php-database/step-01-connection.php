@@ -31,7 +31,7 @@ require_once __DIR__ . '/lib/config.php';
         <pre><code class="language-php">&lt;?php
 // Database credentials
 $host = 'mysql-container';
-$dbname = 'testdb';
+$dbname = 'games_db';
 $username = 'testuser';
 $password = 'mysecret';
 
@@ -44,14 +44,16 @@ try {
     echo "Connected successfully!";
 } catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
-}</code></pre>
+}
 
-        <p class="output-label">Output:</p>
+</code></pre>
+
+    <p class="output-label">Output:</p>
         <div class="output">
             <?php
             // Database credentials
             $host = 'mysql-container';
-            $dbname = 'testdb';
+            $dbname = 'games_db';
             $username = 'testuser';
             $password = 'mysecret';
 
