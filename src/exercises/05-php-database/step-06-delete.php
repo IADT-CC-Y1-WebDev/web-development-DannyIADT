@@ -43,6 +43,17 @@ catch (PDOException $e) {
             <?php
             // TODO: Write your solution here
             // 1. INSERT a temporary book
+            $stmt = $db->prepare("DELETE FROM books WHERE id = :id");
+            $stmt->execute(['id' => 11]);
+
+            $deleted = $stmt->rowCount();
+
+            if($deleted > 0){
+                echo "Deleted $deleted record(s)";
+            }
+            else{
+                echo "No records found to delete";
+            }
             // 2. Get the new ID
             // 3. Display "Created book with ID: X"
             // 4. DELETE FROM books WHERE id = :id
