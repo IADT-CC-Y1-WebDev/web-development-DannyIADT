@@ -20,6 +20,10 @@
     See slides for instructions. Put your solutions in the <code>exercises/07-js-dom/</code> folder.
   </p>
 
+  <input type="text" id="myInput">
+  <button id="myButton">Click me to add p tag</button>
+
+  <script src="app.js"></script>
 
 </body>
 

@@ -403,7 +403,7 @@ class Validator {
 
         // Convert extensions to MIME types
         $mimeTypeMap = [
-            'jpg' => 'image/jpeg',
+            'jpg' => 'image/jpg',
             'jpeg' => 'image/jpeg',
             'png' => 'image/png',
             'gif' => 'image/gif',
