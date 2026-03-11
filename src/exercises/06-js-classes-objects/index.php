@@ -20,6 +20,7 @@
     See slides for instructions. Put your solutions in the <code>exercises/06-js-classes-objects/</code> folder.
   </p>
 
+  <script type="module" src="CarCollection/app.js"></script>
 
 </body>
 

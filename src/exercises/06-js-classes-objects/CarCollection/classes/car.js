@@ -1,10 +1,11 @@
 class Car{
 
-    constructor(_make, _model, _year, _colour){
+    constructor(_make, _model, _year, _colour, _extras = []){
         this.make = _make;
         this.model = _model;
         this.year = _year;
         this.colour = _colour;
+        this.extras = _extras;
     }
 
     toString() {
@@ -14,6 +15,11 @@ class Car{
     Year: ${this.year}
     Colour: ${this.colour}
     `;
+    }
+
+
+    getExtras(){
+        return this.extras;
     }
 
 }
