@@ -128,9 +128,9 @@ class Book {
             'author' => $this->author,
             'publisher_id' => $this->publisher_id,
             'year' => $this->year,
-            'isbn'=> $this->description,
+            'isbn'=> $this->isbn,
             'description' => $this->description,
-            'cover_filename' => $this->image_filename
+            'cover_filename' => $this->cover_filename
             ];
         }
         // Execute statement

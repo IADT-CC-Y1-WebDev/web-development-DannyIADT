@@ -34,7 +34,7 @@ try {
         'author' => 'required|notempty|min:1|max:255',
         'publisher_id' => 'required|integer',
         'year' => 'required|notempty',
-        'isbn' => 'required|integer',
+        'isbn' => 'required|max:20',
         'description' => 'required|notempty|min:10|max:5000',
         'cover_filename' => 'required|file|image|mimes:jpg,jpeg,png|max_file_size:5242880'
     ];
@@ -53,14 +53,14 @@ try {
 
     // All validation passed - now process and save
     // Verify genre exists
-    $genre = Publisher::findById($data['publisher_id']);
-    if (!$genre) {
+    $publisher = Publisher::findById($data['publisher_id']);
+    if (!$publisher) {
         throw new Exception('Selected publisher does not exist.');
     }
 
     // Process the uploaded image (validation already completed)
     $uploader = new ImageUpload();
-    $imageFilename = $uploader->process($_FILES['image']);
+    $imageFilename = $uploader->process($_FILES['cover_filename']);
 
     if (!$imageFilename) {
         throw new Exception('Failed to process and save the image.');
@@ -70,14 +70,14 @@ try {
     $book = new Book();
     $book->title = $data['title'];
     $book->author = $data['author'];
-    $book->publisher_id['publisher_id'];
+    $book->publisher_id = $data['publisher_id'];
     $book->year = $data['year'];
     $book->isbn = $data['isbn'];
     $book->description = $data['description'];
     $book->cover_filename = $imageFilename;
 
     // Save to database
-    $game->save();
+    $book->save();
 
     // Clear any old form data
     clearFormData();
@@ -91,6 +91,11 @@ try {
     redirect('book_view.php?id=' . $book->id);
 }
 catch (Exception $e) {
+
+
+    var_dump($data['isbn'], strlen($data['isbn']));
+    die();
+
     // Error - clean up uploaded image
     if (isset($imageFilename) && $imageFilename) {
         $uploader->deleteImage($imageFilename);
