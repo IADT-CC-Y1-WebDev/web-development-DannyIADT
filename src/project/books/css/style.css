@@ -190,3 +190,7 @@ form {
 	color: #252525;
 	font-weight: 900;
 }
+
+.hidden{
+	display: none;
+}

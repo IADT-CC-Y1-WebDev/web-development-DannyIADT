@@ -21,10 +21,11 @@ try {
     $data = [
         'id' => $_POST['id'] ?? null,
         'title' => $_POST['title'] ?? null,
-        'release_date' => $_POST['release_date'] ?? null,
-        'genre_id' => $_POST['genre_id'] ?? null,
+        'author' => $_POST['author'] ?? null,
+        'publisher_id' => $_POST['publisher_id'] ?? null,
+        'year' => $_POST['year'] ?? null,
+        'isbn' => $_POST['isbn'] ?? null,
         'description' => $_POST['description'] ?? null,
-        'platform_ids' => $_POST['platform_ids'] ?? [],
         'image' => $_FILES['image'] ?? null
     ];
 
@@ -32,6 +33,8 @@ try {
     $rules = [
         'id' => 'required|integer',
         'title' => 'required|notempty|min:1|max:255',
+        'author' => 'required|notempty|min:1|max:255',
+        'publisher_id' => 'required|notempty',
         'year' => 'required|notempty',
         'isbn' => 'required|notempty',
         'description' => 'required|notempty|min:10|max:5000',
@@ -54,12 +57,6 @@ try {
     $book = Book::findById($data['id']);
     if (!$book) {
         throw new Exception('Book not found.');
-    }
-
-    // Verify genre exists
-    $author = Author::findById($data['author_id']);
-    if (!$author) {
-        throw new Exception('Selected author does not exist.');
     }
 
     // Verify platforms exist
