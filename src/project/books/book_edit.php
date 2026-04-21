@@ -21,6 +21,13 @@ try {
     }
 
     $publishers = Publisher::findAll();
+    $formats = FormatName::findAll();
+    $bookFormats = Format::findByBookId($book->id);
+
+    $selectedFormats = array_map(
+    fn($f) => $f->format_id,
+    $bookFormats
+);
 
 }
 catch (PDOException $e) {
@@ -100,6 +107,15 @@ catch (PDOException $e) {
                             <p><?= error('description') ?></p>
                         </div>
                     </div>
+
+                    <?php foreach($formats as $f){ ?>
+                        <label class="special">
+                            <?= h($f->name) ?>
+                            <input type="checkbox" name="formats[]" value="<?= h($f->id) ?>"
+                            <?= in_array($f->id, $selectedFormats) ? 'checked' : '' ?>>
+                        </label>
+                    <?php } ?> 
+                    <p><?= error('formats') ?></p>
 
                     <div><img src="images/<?= $book->cover_filename ?>" /></div>
                     <div class="input">

@@ -12,6 +12,13 @@ try {
     if ($book === null) {
         die("<p>Error: Book not found.</p>");
     }
+
+    $formats = Format::findByBookId($id);
+    $formatNames = [];
+
+    foreach($formats as $f){ 
+        $formatNames[] = FormatName::findById($f->format_id);
+    }
 } 
 catch (PDOException $e) {
     setFlashMessage('error', 'Error: ' . $e->getMessage());
@@ -48,6 +55,10 @@ catch (PDOException $e) {
                         <p>Release Year: <?= htmlspecialchars($book->year) ?></p>
                         <p>Author: <?= htmlspecialchars($book->author) ?></p>
                         <p>Description:<br /><?= nl2br(htmlspecialchars($book->description)) ?></p>
+                        <p>Formats:</p>
+                        <?php foreach($formatNames as $f){ ?>
+                        <p><?= $f->name ?></p>
+                       <?php } ?>
                     </div>
                 </div>
             </div>

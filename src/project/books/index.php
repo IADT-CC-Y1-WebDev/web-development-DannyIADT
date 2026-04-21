@@ -47,7 +47,7 @@ catch (PDOException $e) {
                         </div>
 
                         <div>
-                            <button type="button" id="apply_filters">Apply Filters</button>
+                            <button type="submit" id="apply_filters">Apply Filters</button>
                             <button type="button" id="clear_filters">Clear Filters</button>
                         </div>
                     </form>

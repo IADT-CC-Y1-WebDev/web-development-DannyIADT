@@ -26,7 +26,9 @@ try {
         'year' => $_POST['year'] ?? null,
         'isbn' => $_POST['isbn'] ?? null,
         'description' => $_POST['description'] ?? null,
-        'image' => $_FILES['image'] ?? null
+        'image' => $_FILES['image'] ?? null,
+        'formats' => $_POST['formats'] ?? [],
+
     ];
 
     // Define validation rules
@@ -38,7 +40,7 @@ try {
         'year' => 'required|notempty',
         'isbn' => 'required|notempty',
         'description' => 'required|notempty|min:10|max:5000',
-        'image' => 'file|image|mimes:jpg,jpeg,png|max_file_size:5242880' // optional -- no required rule
+        'image' => 'file|image|mimes:jpg,jpeg,png|max_file_size:5242880', // optional -- no required rule
     ];
 
     // Validate all data (including file)
@@ -93,6 +95,16 @@ try {
 
     // Save to database
     $book->save();
+
+    Format::DeleteByBookId($book->id);
+
+    foreach($data['formats'] as $f){
+        $format = new Format();
+        $format->book_id = $book->id;
+        $format->format_id = $f;
+
+        $format->save();
+    }
 
     // Delete existing platform associations
     /*GamePlatform::deleteByGame($game->id);

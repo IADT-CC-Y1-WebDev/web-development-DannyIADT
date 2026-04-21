@@ -8,6 +8,7 @@ startSession();
 
 try {
     $publishers = Publisher::findAll();
+    $formats = FormatName::findAll();
 }
 catch (PDOException $e) {
     setFlashMessage('error', 'Error: ' . $e->getMessage());
@@ -83,6 +84,14 @@ catch (PDOException $e) {
                             <p><?= error('description') ?></p>
                         </div>
                     </div>
+
+                    <?php foreach($formats as $f){ ?>
+                        <label class="special">
+                            <?= $f->name ?>
+                            <input type="checkbox" name="formats[]" value="<?= h($f->id) ?>">
+                        </label>
+                    <?php } ?> 
+                    <p><?= error('formats') ?></p>
 
                     <div class="input">
                         <label class="special" for="cover_filename">Image (required):</label>

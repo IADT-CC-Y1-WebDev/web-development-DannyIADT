@@ -25,7 +25,8 @@ try {
         'year' => $_POST['year'] ?? null,
         'isbn' => $_POST['isbn'] ?? null,
         'description' => $_POST['description'] ?? null,
-        'cover_filename' => $_FILES['cover_filename'] ?? null
+        'cover_filename' => $_FILES['cover_filename'] ?? null,
+        'formats' => $_POST['formats'] ?? [],
     ];
 
     // Define validation rules
@@ -36,7 +37,7 @@ try {
         'year' => 'required|notempty',
         'isbn' => 'required|max:20',
         'description' => 'required|notempty|min:10|max:5000',
-        'cover_filename' => 'required|file|image|mimes:jpg,jpeg,png|max_file_size:5242880'
+        'cover_filename' => 'required|file|image|mimes:jpg,jpeg,png|max_file_size:5242880',
     ];
 
     // Validate all data (including file)
@@ -58,6 +59,10 @@ try {
         throw new Exception('Selected publisher does not exist.');
     }
 
+    if (empty($data['formats'])) {
+        throw new Exception("At least one format must be selected.");
+    }
+
     // Process the uploaded image (validation already completed)
     $uploader = new ImageUpload();
     $imageFilename = $uploader->process($_FILES['cover_filename']);
@@ -76,8 +81,15 @@ try {
     $book->description = $data['description'];
     $book->cover_filename = $imageFilename;
 
-    // Save to database
     $book->save();
+
+    foreach($data['formats'] as $f){
+        $format = new Format();
+        $format->book_id = $book->id;
+        $format->format_id = $f;
+
+        $format->save();
+    }
 
     // Clear any old form data
     clearFormData();
@@ -92,9 +104,6 @@ try {
 }
 catch (Exception $e) {
 
-
-    var_dump($data['isbn'], strlen($data['isbn']));
-    die();
 
     // Error - clean up uploaded image
     if (isset($imageFilename) && $imageFilename) {

@@ -79,7 +79,7 @@ class Book {
             WHERE gp.author = :author
             ORDER BY g.title
         ");
-        $stmt->execute(['author' => $platformId]);
+        $stmt->execute(['author' => $Authorid]);
 
         $books = [];
         while ($row = $stmt->fetch()) {

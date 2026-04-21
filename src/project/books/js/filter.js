@@ -6,10 +6,12 @@ let cards = document.querySelectorAll('.card');
 
 let form = document.getElementById("filters");
 
-applyBtn.addEventListener('click', (event) => {
+
+
+form.addEventListener('submit', (event) => {
     event.preventDefault();
     applyFilters();
-});
+})
 
 clearBtn.addEventListener('click', (event) => {
     event.preventDefault();
