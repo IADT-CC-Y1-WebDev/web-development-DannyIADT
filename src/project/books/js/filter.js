@@ -19,7 +19,7 @@ clearBtn.addEventListener('click', (event) => {
 });
 
 function applyFilters() {
-    console.log("Applying filters");
+    console.log(getFilters());
     let filters = getFilters();
     // let matches = [];
     for (let i = 0; i != cards.length; i++) {
@@ -54,23 +54,34 @@ function cardMatches(crd, fltrs) {
     // console.log(crd.dataset.title, fltrs.titleFilter);
     let title = crd.dataset.title.toLowerCase();
     let publisher = crd.dataset.publisher;
+    let formats = (crd.dataset.format || '').split(',').map(f => f.trim());
 
     let matchTitle    = fltrs.titleFilter    === "" || title.includes(fltrs.titleFilter);
     let matchPublisher    = fltrs.publisherFilter    === "" || publisher === fltrs.publisherFilter;
+    let matchFormat    = fltrs.formatFilter    === "" || formats.includes(String(fltrs.formatFilter));
 
-    return matchTitle && matchPublisher;
+    console.log({
+        cardFormats: formats,
+        selected: fltrs.formatFilter
+    });
+
+
+    return matchTitle && matchPublisher && matchFormat;
 }
 
 function getFilters() {
     const titleEl = form.elements['title_filter'];
     const publisherEl = form.elements['publisher_filter'];
+    const formatEl = form.elements["format_filter"];
 
     let titleFilter = (titleEl.value || '').trim().toLowerCase();
     let publisherFilter = publisherEl.value || '';
+    let formatFilter = formatEl.value || '';
 
     return {
         "titleFilter" : titleFilter,
         "publisherFilter" : publisherFilter,
+        "formatFilter" : formatFilter,
         "sortBy" : "title_asc"
     };
 }

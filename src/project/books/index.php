@@ -5,6 +5,7 @@ require_once 'php/lib/utils.php';
 try {
     $books = Book::findAll();
     $publishers = Publisher::findAll();
+    $formats = FormatName::findAll();
 } 
 catch (PDOException $e) {
     die("<p>PDO Exception: " . $e->getMessage() . "</p>");
@@ -47,6 +48,16 @@ catch (PDOException $e) {
                         </div>
 
                         <div>
+                            <label for="format_filter">Format:</label>
+                            <select id="format_filter" name="format_filter">
+                                <option value="">All formats</option>
+                                <?php  foreach ($formats as $format) { ?>
+                                    <option value="<?=  h($format->id) ?>"><?=  h($format->name) ?></option>
+                                <?php  } ?>
+                            </select>
+                        </div>
+
+                        <div>
                             <button type="submit" id="apply_filters">Apply Filters</button>
                             <button type="button" id="clear_filters">Clear Filters</button>
                         </div>
@@ -60,9 +71,13 @@ catch (PDOException $e) {
             <?php } else { ?>
                 <div id="cards" class="width-12 cards">
                     <?php foreach ($books as $book) { ?>
+                    <?php $bookFormat = Format::findByBookId($book->id);
+                    $formatIDs = array_map(fn($f) => $f->format_id, $bookFormat); ?>
+
                         <div class="card" 
                         data-title="<?= h($book->title) ?>"
-                        data-publisher="<?= h($book->publisher_id) ?>">
+                        data-publisher="<?= h($book->publisher_id) ?>"
+                        data-format="<?= h(implode(',', array_filter($formatIDs))) ?>">
 
                             <div class="top-content">
                                 <h2>Title: <?= h($book->title) ?></h2>
