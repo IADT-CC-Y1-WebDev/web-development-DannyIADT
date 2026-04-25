@@ -107,6 +107,8 @@ catch (PDOException $e) {
                 </form>
             </div>
         </div>
+
+        <script src="js/Validator.js"></script>
     </body>
 </html>
 <?php

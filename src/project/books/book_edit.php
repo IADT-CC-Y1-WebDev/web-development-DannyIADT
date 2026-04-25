@@ -119,10 +119,10 @@ catch (PDOException $e) {
 
                     <div><img src="images/<?= $book->cover_filename ?>" /></div>
                     <div class="input">
-                        <label class="special" for="image">cover:</label>
+                        <label class="special" for="cover_filename">cover:</label>
                         <div>
-                            <input type="file" id="image" name="image" accept="image/*">
-                            <p><?= error('image') ?></p>
+                            <input type="file" id="cover_filename" name="cover_filename" accept="image/*">
+                            <p><?= error('cover_filename') ?></p>
                         </div>
                     </div>
                     <div class="input">
@@ -132,6 +132,9 @@ catch (PDOException $e) {
                 </form>
             </div>
         </div>
+
+        <script src="js/Validator.js"></script>
+
     </body>
 </html>
 <?php
