@@ -48,6 +48,8 @@ catch (PDOException $e) {
                             </select>
                         </div>
 
+                        
+
                         <div>
                             <label for="format_filter">Format:</label>
                             <select id="format_filter" name="format_filter">

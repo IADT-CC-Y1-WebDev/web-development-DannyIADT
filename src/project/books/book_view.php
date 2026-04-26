@@ -16,6 +16,8 @@ try {
     $formats = Format::findByBookId($id);
     $formatNames = [];
 
+    $publisher = Publisher::findById($book->publisher_id);
+
     foreach($formats as $f){ 
         $formatNames[] = FormatName::findById($f->format_id);
     }
@@ -54,6 +56,7 @@ catch (PDOException $e) {
                         <h2><?= htmlspecialchars($book->title) ?></h2>
                         <p>Release Year: <?= htmlspecialchars($book->year) ?></p>
                         <p>Author: <?= htmlspecialchars($book->author) ?></p>
+                        <p>Publisher: <?= htmlspecialchars($publisher->name) ?></p>
                         <p>Description:<br /><?= nl2br(htmlspecialchars($book->description)) ?></p>
                         <p>Formats:</p>
                         <?php foreach($formatNames as $f){ ?>
