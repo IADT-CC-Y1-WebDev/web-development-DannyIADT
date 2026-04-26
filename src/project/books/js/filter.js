@@ -19,7 +19,6 @@ clearBtn.addEventListener('click', (event) => {
 });
 
 function applyFilters() {
-    console.log(getFilters());
     let filters = getFilters();
     // let matches = [];
     for (let i = 0; i != cards.length; i++) {
@@ -55,33 +54,44 @@ function cardMatches(crd, fltrs) {
     let title = crd.dataset.title.toLowerCase();
     let publisher = crd.dataset.publisher;
     let formats = (crd.dataset.format || '').split(',').map(f => f.trim());
+    let year = Number(crd.dataset.year);
+    console.log(year);
 
     let matchTitle    = fltrs.titleFilter    === "" || title.includes(fltrs.titleFilter);
     let matchPublisher    = fltrs.publisherFilter    === "" || publisher === fltrs.publisherFilter;
     let matchFormat    = fltrs.formatFilter    === "" || formats.includes(String(fltrs.formatFilter));
+    let matchYear;
+    
+    if(fltrs.yearFilter === "before_2000"){
+        matchYear = year < 2000;
+    }
+    else if(fltrs.yearFilter === "2000_later"){
+        matchYear = year >= 2000;
+    }
+    else{
+        matchYear = true;
+    }
 
-    console.log({
-        cardFormats: formats,
-        selected: fltrs.formatFilter
-    });
 
-
-    return matchTitle && matchPublisher && matchFormat;
+    return matchTitle && matchPublisher && matchFormat && matchYear;
 }
 
 function getFilters() {
     const titleEl = form.elements['title_filter'];
     const publisherEl = form.elements['publisher_filter'];
     const formatEl = form.elements["format_filter"];
+    const yearEl = form.elements["year_filter"];
 
     let titleFilter = (titleEl.value || '').trim().toLowerCase();
     let publisherFilter = publisherEl.value || '';
     let formatFilter = formatEl.value || '';
+    let yearFilter = yearEl.value || '';
 
     return {
         "titleFilter" : titleFilter,
         "publisherFilter" : publisherFilter,
         "formatFilter" : formatFilter,
+        "yearFilter" : yearFilter,
         "sortBy" : "title_asc"
     };
 }

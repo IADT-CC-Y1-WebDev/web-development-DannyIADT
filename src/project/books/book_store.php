@@ -53,7 +53,7 @@ try {
     }
 
     // All validation passed - now process and save
-    // Verify genre exists
+    // Verify publisher exists
     $publisher = Publisher::findById($data['publisher_id']);
     if (!$publisher) {
         throw new Exception('Selected publisher does not exist.');
@@ -71,7 +71,7 @@ try {
         throw new Exception('Failed to process and save the image.');
     }
 
-    // Create new game instance
+    // Create new book instance
     $book = new Book();
     $book->title = $data['title'];
     $book->author = $data['author'];
@@ -99,7 +99,7 @@ try {
     // Set success flash message
     setFlashMessage('success', 'Book stored successfully.');
 
-    // Redirect to game details page
+    // Redirect to book details page
     redirect('book_view.php?id=' . $book->id);
 }
 catch (Exception $e) {

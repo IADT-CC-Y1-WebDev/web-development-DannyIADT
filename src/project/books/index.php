@@ -37,6 +37,7 @@ catch (PDOException $e) {
                             <label for="title_filter">Title:</label>
                             <input type="text" id="title_filter" name="title_filter">
                         </div>
+
                         <div>
                             <label for="publisher_filter">Publisher:</label>
                             <select id="publisher_filter" name="publisher_filter">
@@ -54,6 +55,16 @@ catch (PDOException $e) {
                                 <?php  foreach ($formats as $format) { ?>
                                     <option value="<?=  h($format->id) ?>"><?=  h($format->name) ?></option>
                                 <?php  } ?>
+                            </select>
+                        </div>
+
+                             <div>
+                            <label for="year_filter">Year:</label>
+                            <select id="year_filter" name="year_filter">
+                                <option value="">All Years</option>
+                                <option value="before_2000">Before 2000</option>
+                                <option value="2000_later">2000 and later</option>
+
                             </select>
                         </div>
 
@@ -77,7 +88,8 @@ catch (PDOException $e) {
                         <div class="card" 
                         data-title="<?= h($book->title) ?>"
                         data-publisher="<?= h($book->publisher_id) ?>"
-                        data-format="<?= h(implode(',', array_filter($formatIDs))) ?>">
+                        data-format="<?= h(implode(',', array_filter($formatIDs))) ?>"
+                        data-year="<?= h($book->year) ?>">
 
                             <div class="top-content">
                                 <h2>Title: <?= h($book->title) ?></h2>

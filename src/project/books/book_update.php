@@ -55,34 +55,26 @@ try {
         throw new Exception('Validation failed.');
     }
 
-    // Find existing game
+    // Find existing book
     $book = Book::findById($data['id']);
     if (!$book) {
         throw new Exception('Book not found.');
     }
 
-    // Verify platforms exist
-    /*foreach ($data['platform_ids'] as $platformId) {
-        if (!Platform::findById($platformId)) {
-            throw new Exception('One or more selected platforms do not exist.');
-        }
-    }*/
-
-    // Process the uploaded image (validation already completed)
-    $coverFilename = null;
     $uploader = new ImageUpload();
-    if ($uploader->hasFile('image')) {
+    
+    if ($uploader->hasFile('cover_filename')) {
         // Delete old image
         $uploader->deleteImage($book->cover_filename);
         // Process new image
-        $coverFilename = $uploader->process($_FILES['image']);
+        $coverFilename = $uploader->process($_FILES['cover_filename']);
         // Check for processing errors
         if (!$coverFilename) {
             throw new Exception('Failed to process and save the image.');
         }
     }
     
-    // Update the game instance
+    // Update the book instance
     $book->title = $data['title'];
     $book->author = $data['author'];
     $book->publisher_id = $data['publisher_id'];
@@ -106,15 +98,6 @@ try {
         $format->save();
     }
 
-    // Delete existing platform associations
-    /*GamePlatform::deleteByGame($game->id);
-    // Create new platform associations
-    if (!empty($data['platform_ids']) && is_array($data['platform_ids'])) {
-        foreach ($data['platform_ids'] as $platformId) {
-            GamePlatform::create($game->id, $platformId);
-        }
-    }*/
-
     // Clear any old form data
     clearFormData();
     // Clear any old errors
@@ -123,11 +106,10 @@ try {
     // Set success flash message
     setFlashMessage('success', 'Book updated successfully.');
 
-    // Redirect to game details page
+    // Redirect to book details page
     redirect('book_view.php?id=' . $book->id);
 }
 catch (Exception $e) {
-    // Error - clean up uploaded image
     if ($coverFilename) {
         $uploader->deleteImage($coverFilename);
     }
